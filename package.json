@@ -1,0 +1,23 @@
+{
+  "name": "arvancloud-cdn-setup",
+  "version": "1.0.0",
+  "description": "A CLI tool to set up ArvanCloud CDN domains, DNS, and SSL in step-by-step or full mode",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "arvancloud",
+    "cdn",
+    "dns",
+    "ssl",
+    "cli",
+    "nodejs"
+  ],
+  "author": "sajad-mhr",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.5",
+    "dotenv": "^17.2.4"
+  }
+}

@@ -48,7 +48,7 @@ async function addDomain() {
   }
 }
 
-async function waitForActivation(timeout = 1800000) {
+async function waitForActivation(timeout = 3600000) {
   const start = Date.now();
   while (Date.now() - start < timeout) {
     const res = await api.get(`/domains/${domain}`);
@@ -67,7 +67,7 @@ async function waitForActivation(timeout = 1800000) {
 }
 
 async function addDNS() {
-  await waitForActivation(); // نیازمندی قبل از اجرا
+  await waitForActivation();
   try {
     for (const name of DNSNames) {
       const record = {
@@ -92,7 +92,7 @@ async function addDNS() {
   }
 }
 
-async function waitForSslIssued(interval = 60000, timeout = 1800000) {
+async function waitForSslIssued(timeout = 3600000) {
   const start = Date.now();
   while (Date.now() - start < timeout) {
     console.log(`🔍 Checking SSL issuance status for domain: ${domain}`);
@@ -111,13 +111,13 @@ async function waitForSslIssued(interval = 60000, timeout = 1800000) {
     }
 
     console.log("⏳ SSL not issued yet, waiting...");
-    await new Promise((r) => setTimeout(r, interval));
+    await new Promise((r) => setTimeout(r, 60000));
   }
   throw new Error("SSL issuance timeout.");
 }
 
 async function configureSSL() {
-  await waitForSslIssued(); // نیازمندی قبل از اجرا
+  await waitForSslIssued();
   try {
     const body = { ssl_status: true, https_redirect: httpsRedirect };
     console.log(`➡️ Configuring SSL for: ${domain}`);
